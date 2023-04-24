@@ -17,24 +17,29 @@ const MovieCard = ({image, title}) => {
     useEffect(() => {
       const interval = setInterval(() => {
         setCurrentIndex((currentIndex + 1) % movies.length);
-        console.log(currentIndex)
-      }, 3000);
-  
-      return () => clearInterval(interval);
-    }, [currentIndex, movies.length]);
+      }, currentIndex >= 3 ? 1/300 : 3000);
 
+ 
+      return () => clearInterval(interval);
+   
+    }, [currentIndex, movies.length]);
+  
     useEffect(() => {
         if (slideshowRef.current) {
           slideshowRef.current.scrollLeft = currentIndex * slideshowRef.current.offsetWidth;
         }
-      }, [currentIndex]);
+    
+        if (currentIndex === movies.length - 1) {
+          setCurrentIndex(0);
+          slideshowRef.current.scrollLeft = 0;
+        }
+      }, [currentIndex, movies.length]);
   
     return (
       <div className="slideshow" ref={slideshowRef}>
         {movies.map((movie, index) => (
           <MovieCard
             key={index}
-
             image={movie.image}
             title={movie.title}
             isActive={index === currentIndex}
@@ -43,5 +48,7 @@ const MovieCard = ({image, title}) => {
       </div>
     );
   }
+  
+  
   
   export default Slideshow
