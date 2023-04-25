@@ -1,64 +1,98 @@
+
+
 import {React, useState, useEffect} from "react"
 import { Link } from "react-router-dom"
 import { supabase } from "../client"
 
-// import './Post.css'
+const Discussion = () => {
+  const [posts, setPosts] = useState([]);
+  const [selectedFilter, setSelectedFilter] = useState("new"); // default filter is 'new'
 
+  useEffect(() => {
+    async function fetchPosts() {
+      let orderQuery = {};
 
-const Discussion = () => { 
+      // Set the ordering based on the selected filter
+      if (selectedFilter === "new") {
+        orderQuery = { column: "created_at", ascending: false };
+      } else if (selectedFilter === "old") {
+        orderQuery = { column: "created_at", ascending: true };
+      } else if (selectedFilter === "top") {
+        orderQuery = { column: "likes", ascending: false };
+      }
 
-    const [posts, setPosts] = useState([
-       
-    ])
+      const { data } = await supabase
+        .from("Posts")
+        .select()
+        .order(orderQuery.column, { ascending: orderQuery.ascending });
 
+      setPosts(data);
+    }
 
-    useEffect(() => {
-        async function fetchPosts() {
-            const {data}  = await supabase.from('Posts').select().order('created_at', {ascending: true})
-            setPosts(data)
-        }
-        fetchPosts()
-    },[])
+    fetchPosts();
+  }, [selectedFilter]);
 
+  const handleFilterClick = (filter) => {
+    setSelectedFilter(filter);
+  };
 
-    return (
-        <div className="post-container">
-
-        
-        <div className="filter-container">
-            <div className="left">
-
-            <button className="discussion-btn">Top</button>
-            <button className="discussion-btn">New</button>
-            <button className="discussion-btn">Old</button>
-            </div>
-            <div className="right">
-            <button className="discussion-btn red"><Link to={'/create-post'}>+</Link></button>
-            </div>
+  return (
+    <div className="post-container">
+      <div className="filter-container">
+        <div className="left">
+          <button
+            className={`discussion-btn ${selectedFilter === "top" ? "selected" : ""}`}
+            onClick={() => handleFilterClick("top")}
+          >
+            Top
+          </button>
+          <button
+            className={`discussion-btn ${selectedFilter === "new" ? "selected" : ""}`}
+            onClick={() => handleFilterClick("new")}
+          >
+            New
+          </button>
+          <button
+            className={`discussion-btn ${selectedFilter === "old" ? "selected" : ""}`}
+            onClick={() => handleFilterClick("old")}
+          >
+            Old
+          </button>
         </div>
-        {posts.map((post, key) => (
-  <Link to={`/discussion/${post.id}`} key={key}>
-    <div className="card">
-      <p>posted by: <span>{post.author}</span></p>
-      <div className="card__title">{post.title}</div>
-      {post.spoiler ? <span className="spoiler-tag">SPOILER</span> : null}
+        <div className="right">
+          <button className="discussion-btn red">
+            <Link to={"/create-post"}>+</Link>
+          </button>
+        </div>
+      </div>
+      {posts.map((post, key) => (
+        <Link to={`/discussion/${post.id}`} key={key}>
+          <div className="card">
+            <p>
+              posted by: <span>{post.author}</span>
+            </p>
+            <div className="card__title">{post.title}</div>
+            {post.spoiler ? <span className="spoiler-tag">SPOILER</span> : null}
             {console.log(post.post)}
-      {post.post.length < 50 ? (
-  <div dangerouslySetInnerHTML={{ __html: post.post }} />
-) : (
-  <div dangerouslySetInnerHTML={{ __html: `${post.post.slice(0, 50)}...` }} />
-)}
+            {post.post.length < 50 ? (
+              <div dangerouslySetInnerHTML={{ __html: post.post }} />
+            ) : (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `${post.post.slice(0, 50)}...`,
+                }}
+              />
+            )}
 
-<div className="likes-container">
-    <button>{post.likes}👍</button>
-    <button>{post.dislikes}👎</button>
-</div>
+            <div className="likes-container">
+              <button>{post.likes}👍</button>
+              <button>{post.dislikes}👎</button>
+            </div>
+          </div>
+        </Link>
+      ))}
     </div>
-  </Link>
-))}
-        </div>
-    )
-}
+  );
+};
 
-
-export default Discussion
+export default Discussion;

@@ -16,7 +16,7 @@ const PostForm = () => {
     const handleSubmit = async (e) => {
 
         e.preventDefault() 
-        console.log(username, movie, ravingTitle, content)
+       
 
         await supabase.from('Posts').insert({author: username, title:ravingTitle, post: content, movie: movie, spoiler: spoiler}).select()
 
