@@ -388,3 +388,69 @@ div.ql-blank, div.ql-editor{
   margin-left: 20px;
   line-height: 1.5;
 }
+
+
+/* //COMMENTS=========== */
+
+.comment-form{ 
+
+
+  background-color: #222;
+  border: 1px solid #FF1A1A;
+  color: #000;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+  height: fit-content;
+width: fit-content;
+
+border: solid 1px white;
+}
+
+h4{
+  color: #FF1A1A;
+}
+/* 
+div#comment.quill{
+  height: 40vh;
+  width: 70vw;
+} */
+
+.comment-form{
+  display: flex;
+ justify-content: center;
+ flex-direction: column;
+ align-items: center;
+}
+
+.comment-form.div.ql-container.ql-snow{
+  border: none;
+}
+
+.comments-and-comment-form-container{
+  display: flex;
+}
+
+.comment {
+  background-color: #222;
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  max-width: 80%;
+}
+
+.comment p:first-child {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+}
+
+.comment p:last-child {
+  font-size: 0.8em;
+  font-style: italic;
+}
+
+.comment-container{
+  display: flex;
+  flex-direction: column;
+}
