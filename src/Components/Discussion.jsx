@@ -11,19 +11,14 @@ const Discussion = () => {
        
     ])
 
-    const [active, setActive] = useState(null)
 
     useEffect(() => {
         async function fetchPosts() {
             const {data}  = await supabase.from('Posts').select().order('created_at', {ascending: true})
             setPosts(data)
-            console.log(posts)
-            console.log('posts changed')
         }
         fetchPosts()
     },[])
-    
-    const handleNewPost = () => console.log('yo');
 
 
     return (
@@ -38,7 +33,7 @@ const Discussion = () => {
             <button className="discussion-btn">Old</button>
             </div>
             <div className="right">
-            <button className="discussion-btn red" onClick={handleNewPost}><Link to={'/create-post'}>+</Link></button>
+            <button className="discussion-btn red"><Link to={'/create-post'}>+</Link></button>
             </div>
         </div>
         {posts.map((post, key) => (
@@ -54,6 +49,10 @@ const Discussion = () => {
   <div dangerouslySetInnerHTML={{ __html: `${post.post.slice(0, 50)}...` }} />
 )}
 
+<div className="likes-container">
+    <button>{post.likes}👍</button>
+    <button>{post.dislikes}👎</button>
+</div>
     </div>
   </Link>
 ))}

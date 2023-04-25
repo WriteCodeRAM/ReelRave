@@ -123,7 +123,13 @@ footer {
   font-size: 14px;
   text-align: center;
   width: 100vw;
+  /* position: fixed;
+  bottom: 0;
+  z-index: 9999; Add this line */
 }
+
+
+
 
 
 
@@ -213,10 +219,17 @@ footer {
   height: 5vh;
 }
 
+.likes-container{
+  display: flex;
+  gap: 4px;
+}
+
 .card:hover{
   border: solid 2px #FF1A1A;
   transition: 0.3s ease;
 }
+
+
 
 .red{
   color: #FF1A1A;
@@ -275,13 +288,6 @@ p{
   color:  #e1e1e1;
 }
 
-
-div.ql-blank, div.ql-editor{
-  height: 40vh;
-  width: 60vw;
- 
-}
-
 button:hover{
   color: #FF1A1A;
 }
@@ -314,4 +320,71 @@ button:hover{
 
 .label-container input[type="radio"] + label {
   /* margin-left: 10px; */
+}
+
+/* //===========================textbox===========================// */
+
+
+
+.textbox-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+div#raving.quill{
+  width: 60vw;
+}
+
+
+
+
+
+div.ql-blank, div.ql-editor{
+  height: 40vh;
+  width: 50vw;
+ 
+}
+
+
+/* //======================POST PAGE==========================// */
+
+.post-card {
+  background-color: #222;
+  border: 1px solid #FF1A1A;
+  color: #000;
+  padding: 20px;
+  margin: 20px;
+  border-radius: 10px;
+}
+
+.post-card__title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #FF1A1A;
+}
+
+.post-card__author {
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.post-card__content {
+  line-height: 1.5;
+}
+
+.post-card__comment {
+  margin-top: 20px;
+}
+
+.post-card__comment .comment__author {
+  font-style: italic;
+  margin-bottom: 5px;
+}
+
+.post-card__comment .comment__content {
+  margin-left: 20px;
+  line-height: 1.5;
 }

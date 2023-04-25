@@ -42,12 +42,12 @@ const PostForm = () => {
 
             <div className="username-input">
         <label htmlFor="username">Username:</label>
-        <input type="text" value={username} onChange={handleUsername} id="username" name="username" />
+        <input type="text" value={username} onChange={handleUsername} id="username" name="username" required />
             </div>
 
 <div className="movie-input">
         <label htmlFor="title">Movie name:</label>
-        <input type="text" value={movie} onChange={handleMovie} id="title" name="title" />
+        <input type="text" value={movie} onChange={handleMovie} id="title" name="title" required/>
 </div>
 
 <div className="spoiler-input">
@@ -74,9 +74,12 @@ const PostForm = () => {
 <div className="rave-title">
 
         <label htmlFor="raving">Raving title:</label>
-        <input type="text" value={ravingTitle} onChange={handleRavingTitle } id="raving" name="raving" />
+        <input type="text" value={ravingTitle} onChange={handleRavingTitle } id="raving" name="raving" required/>
 </div>
             </div>
+
+            <div className="textbox-container">
+
   
         <label htmlFor="raving">Raving:</label>
         <ReactQuill
@@ -84,7 +87,8 @@ const PostForm = () => {
           name="raving"
           value={content}
           onChange={setContent}
-        />
+          />
+          </div>
   
         <button type="submit">Submit</button>
       </form>
