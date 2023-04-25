@@ -5,6 +5,7 @@ import Nav from './Components/Nav'
 import Footer from './Components/Footer'
 import Discussion from './Components/Discussion'
 import PostForm from './Components/createPost'
+import Post from './Components/Post'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 
@@ -24,6 +25,7 @@ function App() {
     <Route path='/' element={<Hero/>} /> 
     <Route path='/home' element={<Hero/>} /> 
     <Route path='/discussion' element={<Discussion/>} /> 
+    <Route path='/discussion/:id' element={<Post/>} /> 
     <Route path='/create-post' element={<PostForm/>} /> 
   
 

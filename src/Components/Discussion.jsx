@@ -1,5 +1,6 @@
 import {React, useState, useEffect} from "react"
 import { Link } from "react-router-dom"
+import { supabase } from "../client"
 
 // import './Post.css'
 
@@ -12,7 +13,17 @@ const Discussion = () => {
 
     const [active, setActive] = useState(null)
 
+    useEffect(() => {
+        async function fetchPosts() {
+            const {data}  = await supabase.from('Posts').select().order('created_at', {ascending: true})
+            setPosts(data)
+            console.log(posts)
+            console.log('posts changed')
+        }
+        fetchPosts()
+    },[])
     
+    const handleNewPost = () => console.log('yo');
 
 
     return (
@@ -30,13 +41,22 @@ const Discussion = () => {
             <button className="discussion-btn red" onClick={handleNewPost}><Link to={'/create-post'}>+</Link></button>
             </div>
         </div>
-       {posts.map( (post, key) =>  (
-        <div className="card" key={key}>
-          <p>posted by: {post.username}</p>
-          <div className="card__title">{post.postTitle}</div>
-          <div>{post.postContent}</div>
-        </div>
-       ))}
+        {posts.map((post, key) => (
+  <Link to={`/discussion/${post.id}`} key={key}>
+    <div className="card">
+      <p>posted by: <span>{post.author}</span></p>
+      <div className="card__title">{post.title}</div>
+      {post.spoiler ? <span className="spoiler-tag">SPOILER</span> : null}
+            {console.log(post.post)}
+      {post.post.length < 50 ? (
+  <div dangerouslySetInnerHTML={{ __html: post.post }} />
+) : (
+  <div dangerouslySetInnerHTML={{ __html: `${post.post.slice(0, 50)}...` }} />
+)}
+
+    </div>
+  </Link>
+))}
         </div>
     )
 }

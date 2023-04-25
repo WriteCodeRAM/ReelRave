@@ -10,6 +10,7 @@ const PostForm = () => {
     const [movie, setMovie] = useState('')
     const [ravingTitle, setRavingTitle] = useState('')
     const [content, setContent] = useState('');
+    const [spoiler, setSpoiler] = useState(false)
 
 
     const handleSubmit = async (e) => {
@@ -17,7 +18,7 @@ const PostForm = () => {
         e.preventDefault() 
         console.log(username, movie, ravingTitle, content)
 
-        await supabase.from('Posts').insert({author: username, title:ravingTitle, post: content, movie: movie}).select()
+        await supabase.from('Posts').insert({author: username, title:ravingTitle, post: content, movie: movie, spoiler: spoiler}).select()
 
         window.location = "/discussion"
     }
@@ -47,6 +48,28 @@ const PostForm = () => {
 <div className="movie-input">
         <label htmlFor="title">Movie name:</label>
         <input type="text" value={movie} onChange={handleMovie} id="title" name="title" />
+</div>
+
+<div className="spoiler-input">
+<label>
+    Contains Spoiler?
+    <input
+      type="radio"
+      value="true"
+      checked={spoiler}
+      onChange={() => setSpoiler(true)}
+    />
+    Yes
+  </label>
+  <label>
+    <input
+      type="radio"
+      value="false"
+      checked={!spoiler}
+      onChange={() => setSpoiler(false)}
+    />
+    No
+  </label>
 </div>
 <div className="rave-title">
 
