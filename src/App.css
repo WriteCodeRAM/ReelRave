@@ -165,6 +165,9 @@ footer {
   gap: 8px;
 }
 
+.selected{
+  color: #FF1A1A;
+}
 
 
 .card__image {
@@ -222,6 +225,7 @@ footer {
 .likes-container{
   display: flex;
   gap: 4px;
+  justify-content: space-between;
 }
 
 .card:hover{
@@ -390,6 +394,8 @@ div.ql-blank, div.ql-editor{
 }
 
 
+
+
 /* //COMMENTS=========== */
 
 .comment-form{ 
@@ -453,4 +459,8 @@ div#comment.quill{
 .comment-container{
   display: flex;
   flex-direction: column;
+}
+
+input#username.input-change, input#title.input-change, input#raving.input-change{
+  padding: 0;
 }

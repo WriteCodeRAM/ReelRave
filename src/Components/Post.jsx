@@ -9,6 +9,7 @@ const Post = () => {
   const [dislikes, setDislikes] = useState(0);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
+  const [secret, setSecret] = useState("")
   const { id } = useParams();
 
   useEffect(() => {
@@ -20,6 +21,7 @@ const Post = () => {
         setPost(data);
         setLikes(data.likes);
         setDislikes(data.dislikes);
+        setSecret(data.secretkey)
         setComments(data.comments || []); // initialize as empty array
       }
     }
@@ -68,6 +70,16 @@ const Post = () => {
       setNewComment("");
     }
   };
+
+  const handleDeletePost = async () => {
+    const confirmation = window.prompt("Please enter the secret key to confirm deletion:");
+    if (confirmation === secret) {
+      await supabase.from('Posts').delete().eq('id', id);
+      window.location.href = "/discussion";
+    } else {
+      alert("Invalid secret key. Please try again.");
+    }
+  };
   
   
 
@@ -80,8 +92,14 @@ const Post = () => {
         <div dangerouslySetInnerHTML={{ __html: post.post }} />
       </div>
       <div className="likes-container">
+        <div className="likes">
+
         <button onClick={handleLikes}>{likes}👍</button>
         <button onClick={handleDislikes}>{dislikes}👎</button>
+        </div>
+        <div className="delete">
+            <button onClick={handleDeletePost}>🗑️</button>
+        </div>
       </div>
    
     
@@ -106,7 +124,7 @@ const Post = () => {
       <div key={index} className="comment">
         <p dangerouslySetInnerHTML={{ __html: comment.comment }}></p>
         {/* <p>by {comment.user_id}</p> */}
-        <p>{new Date(comment.created_at).toLocaleString()}</p>
+        <p>Anon: {new Date(comment.created_at).toLocaleString()}</p>
       </div>
     ))
     : null}

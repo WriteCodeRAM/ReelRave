@@ -8,6 +8,7 @@ const Discussion = () => {
   const [posts, setPosts] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("new"); // default filter is 'new'
 
+
   useEffect(() => {
     async function fetchPosts() {
       let orderQuery = {};

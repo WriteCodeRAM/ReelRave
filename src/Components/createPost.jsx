@@ -11,6 +11,7 @@ const PostForm = () => {
     const [ravingTitle, setRavingTitle] = useState('')
     const [content, setContent] = useState('');
     const [spoiler, setSpoiler] = useState(false)
+    const [secret, setSecret] = useState('')
 
 
     const handleSubmit = async (e) => {
@@ -18,7 +19,7 @@ const PostForm = () => {
         e.preventDefault() 
        
 
-        await supabase.from('Posts').insert({author: username, title:ravingTitle, post: content, movie: movie, spoiler: spoiler}).select()
+        await supabase.from('Posts').insert({author: username, title:ravingTitle, post: content, movie: movie, spoiler: spoiler, secretkey: secret}).select()
 
         window.location = "/discussion"
     }
@@ -36,19 +37,36 @@ const PostForm = () => {
         // console.log(`Raving Title: ${ravingTitle}`)
     }
 
+    const handleSecret = (e) => {
+        setSecret(e.target.value);
+      };
+
     return (
         <form onSubmit={handleSubmit}>
+      
+
+          
             <div className="label-container">
 
             <div className="username-input">
         <label htmlFor="username">Username:</label>
-        <input type="text" value={username} onChange={handleUsername} id="username" name="username" required />
+        <input type="text"  className="input-change" value={username} onChange={handleUsername} id="username" name="username" required />
             </div>
 
 <div className="movie-input">
         <label htmlFor="title">Movie name:</label>
-        <input type="text" value={movie} onChange={handleMovie} id="title" name="title" required/>
+        <input type="text" className="input-change" value={movie} onChange={handleMovie} id="title" name="title" required/>
 </div>
+
+
+
+<div className="rave-title">
+
+        <label htmlFor="raving">Raving title:</label>
+        <input type="text" className="input-change" value={ravingTitle} onChange={handleRavingTitle } id="raving" name="raving" required/>
+</div>
+
+
 
 <div className="spoiler-input">
 <label>
@@ -71,10 +89,11 @@ const PostForm = () => {
     No
   </label>
 </div>
-<div className="rave-title">
 
-        <label htmlFor="raving">Raving title:</label>
-        <input type="text" value={ravingTitle} onChange={handleRavingTitle } id="raving" name="raving" required/>
+<div className="secret-key">
+
+        <label htmlFor="secret-key">secret key 🤫:</label>
+        <input type="password" value={secret} onChange={handleSecret} id="secret" name="secret" required/>
 </div>
             </div>
 
