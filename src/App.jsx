@@ -1,4 +1,3 @@
-import { useState, useEffect} from 'react'
 import './App.css'
 import Hero from './Components/Hero'
 import Nav from './Components/Nav'
@@ -11,7 +10,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 
 
 function App() {
-  const [count, setCount] = useState(0)
+
 
  
 

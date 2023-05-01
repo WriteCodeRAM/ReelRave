@@ -1,16 +1,16 @@
-
-
-import {React, useState, useEffect} from "react"
-import { Link } from "react-router-dom"
-import { supabase } from "../client"
+import { React, useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { supabase } from "../client";
 
 const Discussion = () => {
   const [posts, setPosts] = useState([]);
   const [selectedFilter, setSelectedFilter] = useState("new"); // default filter is 'new'
-
+  const [isLoading, setIsLoading] = useState(false); // default loading state is false
 
   useEffect(() => {
     async function fetchPosts() {
+      setIsLoading(true); // Set loading state to true before fetching data
+
       let orderQuery = {};
 
       // Set the ordering based on the selected filter
@@ -28,6 +28,7 @@ const Discussion = () => {
         .order(orderQuery.column, { ascending: orderQuery.ascending });
 
       setPosts(data);
+      setIsLoading(false); // Set loading state to false after data is fetched
     }
 
     fetchPosts();
@@ -66,6 +67,9 @@ const Discussion = () => {
           </button>
         </div>
       </div>
+
+      {isLoading && <div className="loading-animation"> <div class="lds-ripple"><div></div><div></div></div></div>}
+
       {posts.map((post, key) => (
         <Link to={`/discussion/${post.id}`} key={key}>
           <div className="card">
@@ -91,6 +95,7 @@ const Discussion = () => {
             </div>
           </div>
         </Link>
+
       ))}
     </div>
   );
