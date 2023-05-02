@@ -78,7 +78,7 @@ const Discussion = () => {
             </p>
             <div className="card__title">{post.title}</div>
             {post.spoiler ? <span className="spoiler-tag">SPOILER</span> : null}
-            {console.log(post.post)}
+          
             {post.post.length < 50 ? (
               <div dangerouslySetInnerHTML={{ __html: post.post }} />
             ) : (
