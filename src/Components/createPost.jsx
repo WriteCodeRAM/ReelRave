@@ -21,7 +21,7 @@ const PostForm = () => {
 
         await supabase.from('Posts').insert({author: username, title:ravingTitle, post: content, movie: movie, spoiler: spoiler, secretkey: secret}).select()
 
-        window.location = "/discussion"
+        window.location = "/"
     }
 
     const handleUsername = (e) => {

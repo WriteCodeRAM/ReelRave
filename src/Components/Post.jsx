@@ -134,7 +134,7 @@ const Post = () => {
     </div>
     
   ) : (
-    <p>Loading post...</p>
+    <div className="loading-animation"> <div class="lds-ripple"><div></div><div></div></div></div>
   );
 };
 
