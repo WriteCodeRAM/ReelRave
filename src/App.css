@@ -517,3 +517,67 @@ input#username.input-change, input#title.input-change, input#raving.input-change
     opacity: 0;
   }
 }
+
+/* //-------RESPONSIVE------// */
+
+/* For screens smaller than 768px (e.g. mobile) */
+@media (max-width: 767px) {
+  /* Your styles here */
+  h1{
+
+    font-size: 1.2rem;
+  }
+
+  .hero{
+    height: 65vh;
+  }
+
+  footer{
+display: none;  }
+
+  .logo{
+    width: 130px;
+  }
+
+  .move-card img{
+    width: 50px;
+  }
+
+  .filter-container{
+    width: 100vw;
+  }
+
+
+  .filter-container button{
+    width: 15vw;
+  }
+
+  nav{
+    width: 100vw;
+  }
+}
+
+
+
+/* For screens larger than 768px (e.g. desktop) */
+@media (min-width: 768px) {
+  /* Your styles here */
+}
+
+/* For screens between 768px and 992px */
+@media (min-width: 768px) and (max-width: 991px) {
+  /* Your styles here */
+}
+
+/* For screens between 992px and 1200px */
+@media (min-width: 992px) and (max-width: 1199px) {
+  /* Your styles here */
+}
+
+/* For screens larger than 1200px */
+@media (min-width: 1200px) {
+  /* Your styles here */
+}
+
+
+
